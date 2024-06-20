@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
-
-.idea
-cmake-build-debug
+TextEditor.cpp.bak
+*.bak
+Save/TextEditor.h
+Save/TextEditor.cpp
