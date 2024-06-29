@@ -37,7 +37,7 @@ set(SRC_FILES
 )
 
 find_package(SQLite3 REQUIRED)
-find_package(CURL REQUIRED)
+#find_package(CURL REQUIRED)
 
 if (WIN32)
     # Include a RC file for windows
@@ -50,7 +50,10 @@ endif ()
 # Define the build target for the executable
 add_executable(${PROJECT_NAME} WIN32 MACOSX_BUNDLE ${SRC_FILES})
 # Link executable to the wxWidgets target
-target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES} SQLite::SQLite3 CURL::libcurl)
+target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES}
+        SQLite::SQLite3
+#        CURL::libcurl
+)
 
 if (MSVC)
     # Use manifest from wx.rc
@@ -59,8 +62,10 @@ if (MSVC)
             LINK_FLAGS "/MANIFEST:NO"
     )
 elseif (APPLE)
+    set(CMAKE_XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "little-tools.secret-manager")
+#    set(CMAKE_XCODE_ATTRIBUTE_DEVELOPMENT_TEAM "YOUR_TEAM_ID")
     set_target_properties(${PROJECT_NAME} PROPERTIES
-            RESOURCE "../../src/osx/carbon/wxmac.icns"
+            RESOURCE "../third_party/wxWidgets/samples/../src/osx/carbon/wxmac.icns"
             MACOSX_BUNDLE_ICON_FILE wxmac.icns
             MACOSX_BUNDLE_COPYRIGHT "Copyright wxWidgets"
             MACOSX_BUNDLE_GUI_IDENTIFIER "org.wxwidgets.minimal"
