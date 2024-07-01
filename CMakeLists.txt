@@ -11,4 +11,5 @@ elseif (CMAKE_HOST_UNIX)
 endif ()
 
 add_subdirectory(./SecretManager)
+add_subdirectory(./ImageTools)
 add_subdirectory(./third_party/wxWidgets)
